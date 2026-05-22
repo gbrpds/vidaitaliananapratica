@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guia da Mudança para a Itália · Alexandre Guerzoni</title>
+  <meta name="description" content="O passo a passo real de quem mora há 13 anos na Itália. Chega de informação contraditória nos grupos de Facebook." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── RESET & BASE ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #F0EAE0;
+      --bg-dark:   #E6DDD0;
+      --dark:      #161614;
+      --green:     #1D3B28;
+      --green-mid: #2B5639;
+      --gold:      #B47F2C;
+      --gold-lt:   #D4A84B;
+      --text:      #2A2A26;
+      --muted:     #7A7A6E;
+      --border:    #D3CABB;
+      --white:     #FDFAF5;
+
+      --serif:  'Cormorant Garamond', Georgia, serif;
+      --sans:   'Inter', system-ui, sans-serif;
+
+      --ease-out: cubic-bezier(.22, 1, .36, 1);
+      --ease-in-out: cubic-bezier(.76, 0, .24, 1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: var(--sans); }
+
+    /* ── UTILITY ───────────────────────────────────────────────────── */
+    .container { width: min(1200px, 92%); margin-inline: auto; }
+    .serif     { font-family: var(--serif); }
+    .tag {
+      display: inline-flex; align-items: center; gap: .6rem;
+      font-size: .65rem; font-weight: 500; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .tag::before {
+      content: ''; display: block;
+      width: 2rem; height: 1px; background: var(--gold);
+    }
+    .divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+    }
+
+    /* ── SCROLL ANIMATION ──────────────────────────────────────────── */
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity .9s var(--ease-out), transform .9s var(--ease-out);
+    }
+    [data-reveal].is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    [data-reveal-delay="1"] { transition-delay: .1s; }
+    [data-reveal-delay="2"] { transition-delay: .22s; }
+    [data-reveal-delay="3"] { transition-delay: .34s; }
+    [data-reveal-delay="4"] { transition-delay: .46s; }
+    [data-reveal-delay="5"] { transition-delay: .58s; }
+    [data-reveal-delay="6"] { transition-delay: .70s; }
+
+    /* ── NAV ───────────────────────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.2rem 0;
+      transition: background .4s var(--ease-out), box-shadow .4s var(--ease-out);
+    }
+    #nav.scrolled {
+      background: rgba(240, 234, 224, .88);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+    #nav .container {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; flex-direction: column; line-height: 1.15;
+    }
+    .nav-logo span:first-child {
+      font-family: var(--serif); font-size: 1.2rem; font-weight: 500;
+      color: var(--green);
+    }
+    .nav-logo span:last-child {
+      font-size: .62rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--muted);
+    }
+    .nav-cta {
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      padding: .7rem 1.6rem;
+      font-size: .8rem; font-weight: 500; letter-spacing: .06em;
+      border-radius: 2px;
+      transition: background .25s, transform .25s var(--ease-out);
+    }
+    .nav-cta:hover {
+      background: var(--green-mid);
+      transform: translateY(-1px);
+    }
+
+    /* ── HERO ──────────────────────────────────────────────────────── */
+    #hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 8rem 4% 5rem;
+      background: var(--bg);
+      position: relative;
+      z-index: 2;
+    }
+    .hero-text .tag { margin-bottom: 2.4rem; }
+
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: clamp(2.6rem, 4vw, 4rem);
+      font-weight: 400;
+      line-height: 1.1;
+      color: var(--dark);
+      margin-bottom: 1.6rem;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--green);
+    }
+
+    .hero-sub {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--muted);
+      max-width: 42ch;
+      margin-bottom: 2.8rem;
+    }
+
+    .hero-cta-group { display: flex; flex-direction: column; gap: 1rem; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .7rem;
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      padding: 1.05rem 2.2rem;
+      font-size: .9rem; font-weight: 500; letter-spacing: .05em;
+      border-radius: 2px;
+      width: fit-content;
+      transition: background .3s, transform .3s var(--ease-out), box-shadow .3s;
+    }
+    .btn-primary:hover {
+      background: var(--green-mid);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(29, 59, 40, .25);
+    }
+    .btn-primary svg { transition: transform .3s var(--ease-out); }
+    .btn-primary:hover svg { transform: translateX(4px); }
+
+    .hero-trust {
+      display: flex; align-items: center; gap: 1.2rem;
+      font-size: .72rem; color: var(--muted); letter-spacing: .04em;
+    }
+    .hero-trust span { display: flex; align-items: center; gap: .4rem; }
+    .hero-trust .dot {
+      width: 3px; height: 3px; border-radius: 50%;
+      background: var(--border);
+    }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-image img {
+      transition: transform 8s var(--ease-out);
+    }
+    .hero-image:hover img { transform: scale(1.03); }
+
+    /* ── MARQUEE ───────────────────────────────────────────────────── */
+    #marquee {
+      background: var(--green);
+      padding: .85rem 0;
+      overflow: hidden;
+    }
+    .marquee-track {
+      display: flex; gap: 3rem;
+      animation: marquee 28s linear infinite;
+      white-space: nowrap;
+    }
+    .marquee-item {
+      display: flex; align-items: center; gap: .8rem;
+      font-size: .72rem; font-weight: 500; letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(253, 250, 245, .7);
+      flex-shrink: 0;
+    }
+    .marquee-item .mi-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gold);
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── PROBLEM ───────────────────────────────────────────────────── */
+    #problem {
+      padding: 7rem 0;
+    }
+    .problem-intro {
+      max-width: 58ch;
+      margin-bottom: 4rem;
+    }
+    .problem-intro h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3vw, 2.8rem);
+      font-weight: 400;
+      line-height: 1.2;
+      margin-top: 1rem; margin-bottom: 1.2rem;
+    }
+    .problem-intro p {
+      font-size: 1rem; line-height: 1.75;
+      color: var(--muted);
+    }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5px;
+      background: var(--border);
+      border: 1.5px solid var(--border);
+    }
+    .problem-card {
+      background: var(--bg);
+      padding: 2.2rem 2rem;
+      transition: background .3s;
+    }
+    .problem-card:hover { background: var(--bg-dark); }
+    .problem-card .p-num {
+      font-family: var(--serif); font-size: 3rem;
+      font-weight: 300; color: var(--gold);
+      line-height: 1; margin-bottom: 1.4rem;
+      opacity: .6;
+    }
+    .problem-card h3 {
+      font-family: var(--serif); font-size: 1.3rem;
+      font-weight: 500; color: var(--dark);
+      margin-bottom: .8rem; line-height: 1.25;
+    }
+    .problem-card p {
+      font-size: .88rem; line-height: 1.7;
+      color: var(--muted);
+    }
+
+    /* ── NUMBERS ───────────────────────────────────────────────────── */
+    #numbers {
+      background: var(--green);
+      padding: 5.5rem 0;
+    }
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .number-item {
+      padding: 2rem 2.5rem;
+      border-right: 1px solid rgba(253, 250, 245, .15);
+      text-align: center;
+    }
+    .number-item:last-child { border-right: none; }
+    .number-val {
+      font-family: var(--serif);
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      font-weight: 300;
+      color: var(--white);
+      line-height: 1;
+      display: flex; align-items: baseline; justify-content: center; gap: .2rem;
+    }
+    .number-val .num { display: inline-block; }
+    .number-val .suffix {
+      font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+      color: var(--gold-lt);
+    }
+    .number-label {
+      font-size: .72rem; letter-spacing: .16em; text-transform: uppercase;
+      color: rgba(253, 250, 245, .5);
+      margin-top: .8rem;
+    }
+    .number-desc {
+      font-size: .82rem; color: rgba(253, 250, 245, .65);
+      margin-top: .4rem; line-height: 1.5;
+    }
+
+    /* ── GUIDE CONTENTS ────────────────────────────────────────────── */
+    #guide {
+      padding: 7rem 0;
+    }
+    .guide-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .guide-left .tag { margin-bottom: 1.6rem; }
+    .guide-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3vw, 2.9rem);
+      font-weight: 400; line-height: 1.18;
+      margin-bottom: 1.4rem;
+    }
+    .guide-left p {
+      font-size: .95rem; line-height: 1.75; color: var(--muted);
+      margin-bottom: 2.2rem;
+    }
+
+    .guide-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0;
+      border-top: 1px solid var(--border);
+    }
+    .guide-list li {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: .92rem; line-height: 1.55;
+      color: var(--text);
+      transition: color .2s;
+    }
+    .guide-list li:hover { color: var(--green); }
+    .guide-list li .li-icon {
+      flex-shrink: 0; width: 22px; height: 22px;
+      border: 1px solid var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 1px;
+    }
+    .guide-list li .li-icon svg { width: 10px; height: 10px; }
+
+    .guide-visual {
+      position: sticky; top: 8rem;
+    }
+    .guide-img-wrap {
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      border-radius: 2px;
+      position: relative;
+    }
+    .guide-img-wrap img {
+      transition: transform .7s var(--ease-out);
+    }
+    .guide-img-wrap:hover img { transform: scale(1.04); }
+    .guide-caption {
+      margin-top: 1.2rem;
+      font-size: .78rem; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      text-align: center;
+    }
+
+    /* ── FOR WHOM ──────────────────────────────────────────────────── */
+    #forwhom {
+      background: var(--dark);
+      padding: 7rem 0;
+      color: var(--white);
+    }
+    #forwhom .tag { color: var(--gold-lt); }
+    #forwhom .tag::before { background: var(--gold-lt); }
+    .forwhom-header {
+      margin-bottom: 4rem;
+    }
+    .forwhom-header h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3vw, 2.9rem);
+      font-weight: 400; line-height: 1.18;
+      margin-top: .8rem;
+    }
+    .forwhom-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+    .forwhom-col h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem; font-weight: 400;
+      margin-bottom: 1.6rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+    .forwhom-col.is { color: var(--white); }
+    .forwhom-col.is h3 { color: var(--gold-lt); }
+    .forwhom-col.not h3 { color: rgba(255,255,255,.4); }
+    .forwhom-col.not { color: rgba(255,255,255,.45); }
+    .fw-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .fw-list li {
+      display: flex; align-items: flex-start; gap: .9rem;
+      font-size: .9rem; line-height: 1.6;
+    }
+    .fw-list li .fw-icon {
+      flex-shrink: 0; margin-top: 3px; font-size: .9rem;
+    }
+    .forwhom-col.is .fw-icon { color: var(--gold-lt); }
+    .forwhom-col.not .fw-icon { color: rgba(255,255,255,.25); }
+
+    /* ── ABOUT ─────────────────────────────────────────────────────── */
+    #about {
+      padding: 7rem 0;
+    }
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-img-wrap {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+      border-radius: 2px;
+      position: relative;
+    }
+    .about-img-wrap img {
+      transition: transform .8s var(--ease-out);
+    }
+    .about-img-wrap:hover img { transform: scale(1.03); }
+    .about-text .tag { margin-bottom: 1.6rem; }
+    .about-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.9rem, 2.8vw, 2.7rem);
+      font-weight: 400; line-height: 1.2;
+      margin-bottom: 1.8rem;
+    }
+    .about-text h2 em { font-style: italic; color: var(--green); }
+    .about-text p {
+      font-size: .95rem; line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 1.2rem;
+    }
+    .about-quote {
+      margin-top: 2rem;
+      padding: 1.6rem 1.8rem;
+      border-left: 2px solid var(--gold);
+      background: var(--bg-dark);
+      border-radius: 0 2px 2px 0;
+    }
+    .about-quote p {
+      font-family: var(--serif);
+      font-size: 1.2rem; font-style: italic;
+      color: var(--dark);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ── CASE ──────────────────────────────────────────────────────── */
+    #case {
+      background: var(--green);
+      padding: 6rem 0;
+      color: var(--white);
+    }
+    .case-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .case-label {
+      font-size: .65rem; font-weight: 500; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--gold-lt);
+      margin-bottom: 1.6rem;
+      display: flex; align-items: center; gap: .6rem;
+    }
+    .case-label::before {
+      content: ''; display: block; width: 2rem; height: 1px; background: var(--gold-lt);
+    }
+    .case-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+      font-weight: 400; line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--white);
+    }
+    .case-text p {
+      font-size: .92rem; line-height: 1.75;
+      color: rgba(253, 250, 245, .72);
+      margin-bottom: 1rem;
+    }
+    .case-quote {
+      margin-top: 2rem;
+      padding: 1.8rem;
+      background: rgba(253, 250, 245, .06);
+      border-left: 2px solid var(--gold-lt);
+    }
+    .case-quote blockquote {
+      font-family: var(--serif); font-size: 1.15rem; font-style: italic;
+      line-height: 1.6; color: var(--white);
+      margin-bottom: .8rem;
+    }
+    .case-quote cite {
+      font-size: .75rem; letter-spacing: .1em; text-transform: uppercase;
+      color: var(--gold-lt); font-style: normal;
+    }
+    .case-numbers {
+      display: flex; flex-direction: column; gap: 1.5px;
+    }
+    .case-num-item {
+      background: rgba(253, 250, 245, .05);
+      padding: 1.8rem 2rem;
+      transition: background .3s;
+    }
+    .case-num-item:hover { background: rgba(253, 250, 245, .09); }
+    .case-num-val {
+      font-family: var(--serif); font-size: 2.8rem; font-weight: 300;
+      color: var(--white); line-height: 1;
+    }
+    .case-num-val span { color: var(--gold-lt); }
+    .case-num-label {
+      font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(253, 250, 245, .45); margin-top: .5rem;
+    }
+
+    /* ── FAQ ───────────────────────────────────────────────────────── */
+    #faq {
+      padding: 7rem 0;
+    }
+    .faq-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .faq-left .tag { margin-bottom: 1.4rem; }
+    .faq-left h2 {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+      font-weight: 400; line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+    .faq-left p {
+      font-size: .9rem; line-height: 1.75; color: var(--muted);
+    }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.4rem 0;
+      cursor: pointer;
+      font-size: .95rem; font-weight: 500; color: var(--dark);
+      gap: 1rem;
+      transition: color .2s;
+    }
+    .faq-q:hover { color: var(--green); }
+    .faq-icon {
+      flex-shrink: 0; width: 22px; height: 22px;
+      border: 1px solid var(--border); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .35s var(--ease-out), border-color .2s, background .2s;
+    }
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      border-color: var(--green); background: var(--green);
+      color: var(--white);
+    }
+    .faq-item.open .faq-icon svg path { stroke: var(--white); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .5s var(--ease-out);
+    }
+    .faq-a-inner {
+      padding-bottom: 1.4rem;
+      font-size: .9rem; line-height: 1.75; color: var(--muted);
+    }
+
+    /* ── CTA FINAL ─────────────────────────────────────────────────── */
+    #cta-final {
+      padding: 7rem 0;
+      background: var(--bg-dark);
+    }
+    .cta-final-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .cta-text .tag { margin-bottom: 1.6rem; }
+    .cta-text h2 {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.2vw, 3.2rem);
+      font-weight: 400; line-height: 1.15;
+      margin-bottom: 1.4rem;
+    }
+    .cta-text h2 em { font-style: italic; color: var(--green); }
+    .cta-text p {
+      font-size: .95rem; line-height: 1.75; color: var(--muted);
+    }
+    .cta-card {
+      background: var(--white);
+      padding: 2.8rem 2.6rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+    }
+    .cta-card-label {
+      font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 1rem;
+    }
+    .cta-card-price {
+      font-family: var(--serif);
+      font-size: 3.5rem; font-weight: 300;
+      color: var(--dark); line-height: 1;
+      margin-bottom: .4rem;
+    }
+    .cta-card-price .price-prefix {
+      font-size: 1.4rem; vertical-align: super; margin-right: .1rem;
+    }
+    .cta-card-note {
+      font-size: .78rem; color: var(--muted); margin-bottom: 2rem;
+    }
+    .cta-card .btn-primary {
+      width: 100%; justify-content: center;
+      padding: 1.1rem;
+    }
+    .cta-includes {
+      margin-top: 1.8rem;
+      display: flex; flex-direction: column; gap: .6rem;
+    }
+    .cta-includes li {
+      list-style: none;
+      display: flex; align-items: center; gap: .7rem;
+      font-size: .82rem; color: var(--muted);
+    }
+    .cta-includes li::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold); flex-shrink: 0;
+    }
+
+    /* ── FOOTER ────────────────────────────────────────────────────── */
+    #footer {
+      background: var(--dark);
+      padding: 3rem 0;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-logo span:first-child {
+      font-family: var(--serif); font-size: 1.1rem;
+      color: var(--white);
+    }
+    .footer-logo span:last-child {
+      display: block; font-size: .6rem; letter-spacing: .14em;
+      text-transform: uppercase; color: rgba(255,255,255,.35);
+      margin-top: .2rem;
+    }
+    .footer-links {
+      display: flex; gap: 1.8rem;
+    }
+    .footer-links a {
+      font-size: .78rem; color: rgba(255,255,255,.4);
+      transition: color .2s;
+    }
+    .footer-links a:hover { color: rgba(255,255,255,.75); }
+    .footer-copy {
+      font-size: .72rem; color: rgba(255,255,255,.25);
+      width: 100%; border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 1.5rem; margin-top: .5rem;
+    }
+
+    /* ── SCROLL TO TOP ─────────────────────────────────────────────── */
+    #scroll-top {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 50;
+      width: 44px; height: 44px;
+      background: var(--green); color: var(--white);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .4s, transform .3s var(--ease-out);
+      transform: translateY(10px);
+    }
+    #scroll-top.visible {
+      opacity: 1; pointer-events: all; transform: translateY(0);
+    }
+    #scroll-top:hover { transform: translateY(-3px); }
+
+    /* ── RESPONSIVE ────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-text { padding: 7rem 4% 4rem; }
+      .hero-image { aspect-ratio: 16/9; min-height: 50vw; }
+
+      .numbers-grid { grid-template-columns: 1fr; }
+      .number-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,.12); }
+      .number-item:last-child { border-bottom: none; }
+
+      .guide-inner,
+      .about-inner,
+      .case-inner,
+      .faq-inner,
+      .cta-final-inner { grid-template-columns: 1fr; gap: 3rem; }
+
+      .guide-visual { position: static; }
+      .about-img-wrap { aspect-ratio: 16/9; }
+      .forwhom-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-headline { font-size: 2.2rem; }
+      .hero-trust { flex-wrap: wrap; gap: .6rem; }
+      .cta-final-inner { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .numbers-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ──────────────────────────────────────────────────────── -->
+  <header id="nav">
+    <div class="container">
+      <div class="nav-logo">
+        <span>Vida Italiana na Prática</span>
+        <span>por Alexandre Guerzoni</span>
+      </div>
+      <button class="nav-cta" onclick="document.getElementById('cta-final').scrollIntoView({behavior:'smooth'})">
+        Quero o Guia
+      </button>
+    </div>
+  </header>
+
+  <!-- ── HERO ─────────────────────────────────────────────────────── -->
+  <section id="hero">
+    <div class="hero-text">
+      <p class="tag" data-reveal>Guia Digital</p>
+
+      <h1 class="hero-headline" data-reveal data-reveal-delay="1">
+        Tudo o que você<br>
+        precisa saber antes<br>
+        de <em>mudar para a Itália.</em>
+      </h1>
+
+      <p class="hero-sub" data-reveal data-reveal-delay="2">
+        Chega de colher informação contraditória em grupos de Facebook.
+        Aqui está o passo a passo real — da documentação até a chegada —
+        escrito por quem mora há 13 anos na Itália.
+      </p>
+
+      <div class="hero-cta-group" data-reveal data-reveal-delay="3">
+        <button class="btn-primary" onclick="document.getElementById('cta-final').scrollIntoView({behavior:'smooth'})">
+          Quero o Guia
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <p class="hero-trust">
+          <span>
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+              <path d="M6 1l1.25 2.53 2.79.41-2.02 1.97.48 2.78L6 7.26 3.5 8.69l.48-2.78L2 3.94l2.79-.41L6 1z" fill="currentColor"/>
+            </svg>
+            126 famílias assessoradas
+          </span>
+          <span class="dot"></span>
+          <span>Acesso imediato</span>
+          <span class="dot"></span>
+          <span>PDF + leitura online</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="hero-image">
+      <!-- Substitua pelo arquivo: images/alexandre-hero.jpg -->
+      <img
+        src="images/alexandre-hero.jpg"
+        alt="Alexandre Guerzoni — Monza, Itália"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  <!-- ── MARQUEE ───────────────────────────────────────────────────── -->
+  <div id="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item"><span class="mi-dot"></span>Monza · Brianza</span>
+      <span class="marquee-item"><span class="mi-dot"></span>13 anos de Itália</span>
+      <span class="marquee-item"><span class="mi-dot"></span>126 famílias assessoradas</span>
+      <span class="marquee-item"><span class="mi-dot"></span>Verdade direto, sem firula</span>
+      <span class="marquee-item"><span class="mi-dot"></span>Passo a passo real</span>
+      <span class="marquee-item"><span class="mi-dot"></span>Monza · Brianza</span>
+      <span class="marquee-item"><span class="mi-dot"></span>13 anos de Itália</span>
+      <span class="marquee-item"><span class="mi-dot"></span>126 famílias assessoradas</span>
+      <span class="marquee-item"><span class="mi-dot"></span>Verdade direto, sem firula</span>
+      <span class="marquee-item"><span class="mi-dot"></span>Passo a passo real</span>
+      <span class="marquee-item"><span class="mi-dot"></span>Monza · Briança</span>
+      <span class="marquee-item"><span class="mi-dot"></span>13 anos de Itália</span>
+      <span class="marquee-item"><span class="mi-dot"></span>126 famílias assessoradas</span>
+      <span class="marquee-item"><span class="mi-dot"></span>Verdade direto, sem firula</span>
+      <span class="marquee-item"><span class="mi-dot"></span>Passo a passo real</span>
+    </div>
+  </div>
+
+  <!-- ── PROBLEM ───────────────────────────────────────────────────── -->
+  <section id="problem">
+    <div class="container">
+      <div class="problem-intro">
+        <p class="tag" data-reveal>O problema</p>
+        <h2 data-reveal data-reveal-delay="1">
+          Se você está planejando a mudança, já esbarrou em pelo menos um desses cenários.
+        </h2>
+        <p data-reveal data-reveal-delay="2">
+          A maioria das pessoas passa meses pesquisando e sai mais confusa do que entrou.
+          Não é culpa sua — é porque a informação disponível está espalhada, desatualizada
+          e feita por quem não tem responsabilidade nenhuma sobre o que fala.
+        </p>
+      </div>
+
+      <div class="problem-grid">
+        <div class="problem-card" data-reveal>
+          <div class="p-num">01</div>
+          <h3>Informação contraditória em todo lugar</h3>
+          <p>Cada vídeo fala uma coisa, cada grupo do WhatsApp tem uma opinião diferente,
+             e ninguém é responsável pela informação que passa. Você pesquisa mais e
+             sabe menos.</p>
+        </div>
+        <div class="problem-card" data-reveal data-reveal-delay="1">
+          <div class="p-num">02</div>
+          <h3>Burocracia italiana que paralisa</h3>
+          <p>Codice fiscale, permesso di soggiorno, residência, contrato de aluguel,
+             escola das crianças. Cada etapa tem armadilha. Errar uma pode travar tudo
+             o que vem depois.</p>
+        </div>
+        <div class="problem-card" data-reveal data-reveal-delay="2">
+          <div class="p-num">03</div>
+          <h3>Medo de errar — e o custo é alto</h3>
+          <p>Quando você leva a família inteira, o custo de errar uma decisão é muito alto
+             — emocional e financeiro. Cidade errada, bairro errado, escola errada,
+             contador errado.</p>
+        </div>
+        <div class="problem-card" data-reveal data-reveal-delay="3">
+          <div class="p-num">04</div>
+          <h3>Solidão e desorientação na chegada</h3>
+          <p>Mesmo quem chega com tudo planejado se sente perdido nos primeiros meses.
+             Sem rede, sem saber onde fazer as coisas básicas do dia a dia numa cultura
+             que funciona diferente.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── NUMBERS ───────────────────────────────────────────────────── -->
+  <section id="numbers">
+    <div class="container">
+      <div class="numbers-grid">
+        <div class="number-item" data-reveal>
+          <div class="number-val">
+            <span class="num" data-count="126">0</span>
+            <span class="suffix">+</span>
+          </div>
+          <div class="number-label">Famílias assessoradas</div>
+          <div class="number-desc">Em menos de 6 meses,<br>100% orgânico</div>
+        </div>
+        <div class="number-item" data-reveal data-reveal-delay="2">
+          <div class="number-val">
+            <span class="num" data-count="13">0</span>
+            <span class="suffix"> anos</span>
+          </div>
+          <div class="number-label">Morando na Itália</div>
+          <div class="number-desc">Monza, na região<br>da Brianza</div>
+        </div>
+        <div class="number-item" data-reveal data-reveal-delay="4">
+          <div class="number-val">
+            <span class="num" data-count="18">0</span>
+          </div>
+          <div class="number-label">Famílias já chegaram</div>
+          <div class="number-desc">Instaladas na Itália<br>com suporte do Alexandre</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── GUIDE CONTENTS ────────────────────────────────────────────── -->
+  <section id="guide">
+    <div class="container">
+      <div class="guide-inner">
+        <div class="guide-left">
+          <p class="tag" data-reveal>O que está dentro</p>
+          <h2 data-reveal data-reveal-delay="1">
+            O guia que eu queria ter<br>quando fui pra Itália.
+          </h2>
+          <p data-reveal data-reveal-delay="2">
+            Não tem conteúdo de YouTube reembalado. Não tem dica de quem foi
+            uma vez de turista. É tudo o que eu aprendi em 13 anos morando lá —
+            organizado para que você não precise descobrir do jeito difícil.
+          </p>
+
+          <ul class="guide-list" data-reveal data-reveal-delay="3">
+            <li>
+              <span class="li-icon">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5.5l2 2 4-4" stroke="#B47F2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              A sequência certa: o que fazer antes, durante e depois da mudança
+            </li>
+            <li>
+              <span class="li-icon">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5.5l2 2 4-4" stroke="#B47F2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Documentação: cidadania, codice fiscale, permesso di soggiorno e residência
+            </li>
+            <li>
+              <span class="li-icon">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5.5l2 2 4-4" stroke="#B47F2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Como escolher a cidade e o bairro certos para a sua família
+            </li>
+            <li>
+              <span class="li-icon">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5.5l2 2 4-4" stroke="#B47F2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Custo de vida real por região (não o que aparece no Instagram)
+            </li>
+            <li>
+              <span class="li-icon">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5.5l2 2 4-4" stroke="#B47F2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Sistema de saúde italiano: como funciona na prática
+            </li>
+            <li>
+              <span class="li-icon">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5.5l2 2 4-4" stroke="#B47F2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Escola das crianças: matrícula, sistema e o que esperar
+            </li>
+            <li>
+              <span class="li-icon">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5.5l2 2 4-4" stroke="#B47F2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Os erros mais comuns — e como evitar cada um deles
+            </li>
+            <li>
+              <span class="li-icon">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <path d="M2 5.5l2 2 4-4" stroke="#B47F2C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              Primeiros meses: lista de prioridades para não se perder
+            </li>
+          </ul>
+        </div>
+
+        <div class="guide-visual" data-reveal>
+          <div class="guide-img-wrap">
+            <!-- Substitua pelo arquivo: images/alexandre-about.jpg -->
+            <img
+              src="images/alexandre-about.jpg"
+              alt="Alexandre em Monza, Itália"
+              loading="lazy"
+            />
+          </div>
+          <p class="guide-caption">Monza, região da Brianza — 12 minutos de Milão</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ── FOR WHOM ──────────────────────────────────────────────────── -->
+  <section id="forwhom">
+    <div class="container">
+      <div class="forwhom-header">
+        <p class="tag" data-reveal>Para quem é</p>
+        <h2 data-reveal data-reveal-delay="1">
+          Isso não é para todo mundo.<br>
+          <em style="font-style:italic; color: rgba(253,250,245,.5)">E isso é bom.</em>
+        </h2>
+      </div>
+
+      <div class="forwhom-grid">
+        <div class="forwhom-col is" data-reveal>
+          <h3>É pra você se...</h3>
+          <ul class="fw-list">
+            <li>
+              <span class="fw-icon">✦</span>
+              Você está em processo de cidadania italiana ou já tem
+            </li>
+            <li>
+              <span class="fw-icon">✦</span>
+              Quer mudar de vez — não só conhecer a Itália de passagem
+            </li>
+            <li>
+              <span class="fw-icon">✦</span>
+              Tem família ou planeja levar os filhos
+            </li>
+            <li>
+              <span class="fw-icon">✦</span>
+              Está cansado de informação contraditória e quer algo confiável
+            </li>
+            <li>
+              <span class="fw-icon">✦</span>
+              Valoriza profundidade e detalhe — não conteúdo raso
+            </li>
+            <li>
+              <span class="fw-icon">✦</span>
+              Quer economizar meses de pesquisa e evitar erros caros
+            </li>
+          </ul>
+        </div>
+
+        <div class="forwhom-col not" data-reveal data-reveal-delay="2">
+          <h3>Não é pra você se...</h3>
+          <ul class="fw-list">
+            <li>
+              <span class="fw-icon">✗</span>
+              Você quer conteúdo superficial e promessa fácil
+            </li>
+            <li>
+              <span class="fw-icon">✗</span>
+              Está em busca de atalhos que não existem
+            </li>
+            <li>
+              <span class="fw-icon">✗</span>
+              Não tem interesse real em fazer a mudança
+            </li>
+            <li>
+              <span class="fw-icon">✗</span>
+              Espera que alguém resolva tudo por você sem nenhum esforço da sua parte
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ─────────────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-img-wrap" data-reveal>
+          <!-- Substitua pelo arquivo: images/alexandre-about.jpg -->
+          <img
+            src="images/alexandre-about.jpg"
+            alt="Alexandre Guerzoni em Monza"
+            loading="lazy"
+          />
+        </div>
+
+        <div class="about-text">
+          <p class="tag" data-reveal>Quem é o Alexandre</p>
+          <h2 data-reveal data-reveal-delay="1">
+            Fui um dos primeiros<br>a fazer esse caminho.<br>
+            <em>Sem guia.</em>
+          </h2>
+          <p data-reveal data-reveal-delay="2">
+            Sou brasileiro, moro em Monza há 13 anos — a 12 minutos de trem de Milão,
+            na região da Brianza. Construí a vida italiana do zero: aprendi o idioma,
+            entendi a burocracia, montei uma rede de contatos, coloquei minha filha na escola,
+            naveguei pelo sistema de saúde.
+          </p>
+          <p data-reveal data-reveal-delay="3">
+            Hoje faço isso profissionalmente — ajudo famílias brasileiras a fazerem
+            o mesmo caminho com muito menos erro e muito menos tempo perdido.
+            Em menos de 6 meses abrindo o serviço publicamente, já assessorei
+            mais de 126 famílias. Estou com fila de espera.
+          </p>
+          <p data-reveal data-reveal-delay="4">
+            O guia é o que eu queria ter tido quando cheguei.
+          </p>
+          <div class="about-quote" data-reveal data-reveal-delay="5">
+            <p>"Verdade direto, sem firula. É assim que eu trabalho."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CASE ──────────────────────────────────────────────────────── -->
+  <section id="case">
+    <div class="container">
+      <div class="case-inner">
+        <div class="case-text" data-reveal>
+          <p class="case-label">Caso real</p>
+          <h2>Rafael e Luciana vieram de Poços de Caldas. Com a família inteira.</h2>
+          <p>
+            Rafael e Luciana foram o primeiro casal a chegar na Itália depois que o Alexandre
+            abriu o serviço publicamente. Vieram de Poços de Caldas, com filha, com tudo
+            planejado — e chegaram.
+          </p>
+          <p>
+            Com apenas 6 dias de Itália, responderam mais de 50 perguntas dos seguidores
+            do Alexandre sobre como foi o processo. A história deles está no YouTube.
+          </p>
+          <div class="case-quote">
+            <blockquote>
+              "A gente chegou sem surpresa. Cada etapa que o Alexandre nos preparou foi
+              exatamente como aconteceu. Não teve susto."
+            </blockquote>
+            <cite>— Rafael &amp; Luciana, Poços de Caldas → Itália</cite>
+          </div>
+        </div>
+
+        <div class="case-numbers" data-reveal data-reveal-delay="2">
+          <div class="case-num-item">
+            <div class="case-num-val">6 <span>dias</span></div>
+            <div class="case-num-label">de Itália quando gravaram o depoimento</div>
+          </div>
+          <div class="case-num-item">
+            <div class="case-num-val">50<span>+</span></div>
+            <div class="case-num-label">perguntas respondidas sobre o processo</div>
+          </div>
+          <div class="case-num-item">
+            <div class="case-num-val">0</div>
+            <div class="case-num-label">surpresas negativas na chegada</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ ───────────────────────────────────────────────────────── -->
+  <section id="faq">
+    <div class="container">
+      <div class="faq-inner">
+        <div class="faq-left">
+          <p class="tag" data-reveal>Dúvidas frequentes</p>
+          <h2 data-reveal data-reveal-delay="1">Perguntas que<br>todo mundo tem.</h2>
+          <p data-reveal data-reveal-delay="2">
+            Se a sua dúvida não está aqui,<br>
+            fale diretamente com o Alexandre<br>
+            no Instagram ou no WhatsApp.
+          </p>
+        </div>
+
+        <div class="faq-list" data-reveal>
+          <div class="faq-item">
+            <div class="faq-q">
+              E se eu ainda não tiver cidadania italiana?
+              <span class="faq-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                O guia cobre o cenário de quem está em processo de cidadania e de quem já tem.
+                Se você ainda não tem cidadania mas está em busca do reconhecimento,
+                o guia vai te ajudar a entender como se planejar para estar pronto quando
+                o processo chegar ao fim.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              Preciso falar italiano para comprar o guia?
+              <span class="faq-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Não. O guia é todo em português, escrito para brasileiros. O Alessandro também aborda
+                o tema do idioma dentro do guia — quando você realmente precisa de italiano
+                e como se preparar de forma prática.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              Qual a diferença entre o guia e a mentoria?
+              <span class="faq-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                O guia é o ponto de partida — acesso imediato, auto-guiado, com todas as
+                informações do processo. A mentoria é um serviço completo e personalizado,
+                onde o Alexandre acompanha você desde o Brasil até a chegada e instalação
+                na Itália. Hoje a mentoria tem fila de espera. O guia está disponível agora.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              O guia cobre toda a documentação?
+              <span class="faq-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Sim. Cidadania, codice fiscale, permesso di soggiorno, residência, contrato de aluguel,
+                abertura de conta bancária. O Alexandre detalha cada etapa, a ordem certa de fazer
+                e as armadilhas que a maioria não antecipa.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              Como recebo o guia depois da compra?
+              <span class="faq-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                O acesso é imediato após a confirmação do pagamento. Você recebe um link por e-mail
+                com o PDF para download e também acesso à leitura online, em qualquer dispositivo.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-q">
+              Tem garantia?
+              <span class="faq-icon">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M6 2v8M2 6h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+            </div>
+            <div class="faq-a">
+              <div class="faq-a-inner">
+                Sim. 7 dias de garantia incondicional. Se você comprar, ler e achar que não
+                valeu o investimento, devolvo o dinheiro — sem perguntas, sem burocracia.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA FINAL ─────────────────────────────────────────────────── -->
+  <section id="cta-final">
+    <div class="container">
+      <div class="cta-final-inner">
+        <div class="cta-text">
+          <p class="tag" data-reveal>O guia</p>
+          <h2 data-reveal data-reveal-delay="1">
+            Pare de perder meses com<br>
+            informação que não<br>
+            <em>te leva a lugar nenhum.</em>
+          </h2>
+          <p data-reveal data-reveal-delay="2">
+            O mesmo conteúdo que guia as 126 famílias que já passaram pelo Alexandre —
+            agora em formato acessível, para quem está começando a planejar ou
+            quer fazer certo antes de se comprometer com a mudança.
+          </p>
+        </div>
+
+        <div class="cta-card" data-reveal data-reveal-delay="2">
+          <p class="cta-card-label">Guia Digital — Imigração para a Itália</p>
+          <div class="cta-card-price">
+            <span class="price-prefix">R$</span><!-- Atualize o preço aqui -->97
+          </div>
+          <p class="cta-card-note">Pagamento único · Acesso vitalício</p>
+          <button class="btn-primary" onclick="alert('Link de pagamento a definir')">
+            Quero o Guia agora
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <ul class="cta-includes">
+            <li>PDF para download imediato</li>
+            <li>Leitura online em qualquer dispositivo</li>
+            <li>7 dias de garantia incondicional</li>
+            <li>Atualizações inclusas sem custo adicional</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────────── -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-logo">
+          <span>Vida Italiana na Prática</span>
+          <span>por Alexandre Guerzoni · Monza, Itália</span>
+        </div>
+        <div class="footer-links">
+          <a href="https://instagram.com/vidaitaliananapratica.oficial" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://wa.me/393451255790" target="_blank" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+      <p class="footer-copy">
+        © 2025 Vida Italiana na Prática · Alexandre Guerzoni ·
+        Monza, Brianza — Itália
+      </p>
+    </div>
+  </footer>
+
+  <!-- Scroll to top -->
+  <button id="scroll-top" aria-label="Voltar ao topo"
+    onclick="window.scrollTo({top:0, behavior:'smooth'})">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M8 12V4M4 8l4-4 4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+
+  <script>
+    /* ── NAV SCROLL ─────────────────────────────────────────────── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ── SCROLL TO TOP ──────────────────────────────────────────── */
+    const scrollTopBtn = document.getElementById('scroll-top');
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('visible', window.scrollY > 600);
+    }, { passive: true });
+
+    /* ── REVEAL ON SCROLL ───────────────────────────────────────── */
+    const revealEls = document.querySelectorAll('[data-reveal]');
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12 }
+    );
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    /* ── NUMBER COUNTER ─────────────────────────────────────────── */
+    const counters = document.querySelectorAll('[data-count]');
+    const counterObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseInt(el.dataset.count);
+          const duration = 1600;
+          const start = performance.now();
+          const update = (now) => {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.round(eased * target);
+            if (progress < 1) requestAnimationFrame(update);
+          };
+          requestAnimationFrame(update);
+          counterObserver.unobserve(el);
+        });
+      },
+      { threshold: 0.5 }
+    );
+    counters.forEach(c => counterObserver.observe(c));
+
+    /* ── FAQ ACCORDION ──────────────────────────────────────────── */
+    document.querySelectorAll('.faq-q').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const item = btn.parentElement;
+        const answer = item.querySelector('.faq-a');
+        const isOpen = item.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-a').style.maxHeight = '0';
+        });
+
+        // Open clicked (if wasn't open)
+        if (!isOpen) {
+          item.classList.add('open');
+          answer.style.maxHeight = answer.scrollHeight + 'px';
+        }
+      });
+    });
+
+    /* ── HERO PARALLAX ──────────────────────────────────────────── */
+    const heroImg = document.querySelector('.hero-image img');
+    if (heroImg && window.innerWidth > 900) {
+      window.addEventListener('scroll', () => {
+        const scroll = window.scrollY;
+        const heroH = document.getElementById('hero').offsetHeight;
+        if (scroll < heroH) {
+          heroImg.style.transform = `translateY(${scroll * 0.15}px)`;
+        }
+      }, { passive: true });
+    }
+  </script>
+
+</body>
+</html>
